@@ -66,11 +66,11 @@ jobs:
     - name: put hosts to private
       uses: wlixcc/SFTP-Deploy-Action@v1.0
       with:
-        username: 'GithubHosts'
+        username: 'github'
         server: 'suni.cf'
         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
         local_path: './*.txt'
-        remote_path: '/upload'
+        remote_path: '/rw'
         args: '-o ConnectTimeout=15'
         
     # 删除无用 workflow runs;
