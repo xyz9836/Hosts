@@ -14,7 +14,7 @@ on:
     branches:    
       - main
   schedule:
-    - cron: '0 */2 * * *'
+    - cron: '0 0-12/2 * * *'
 #   issues:
 #     types: [opened]
 
@@ -57,27 +57,27 @@ jobs:
         branch: ${{ github.ref }}
 
     # 同步代码到gitee；
-    - name: Mirror the GithubHosts repos to Gitee
-      uses: Yikun/hub-mirror-action@master
-      with:
-        src: github/JohyC
-        dst: gitee/yuchi-shentang
-        dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
-        dst_token: ${{ secrets.GITEE_TOKEN }}
-        account_type: user
-        force_update: true
-        static_list: GithubHosts
+    #- name: Mirror the GithubHosts repos to Gitee
+    #  uses: Yikun/hub-mirror-action@master
+    #  with:
+    #    src: github/JohyC
+    #    dst: gitee/yuchi-shentang
+    #    dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+    #    dst_token: ${{ secrets.GITEE_TOKEN }}
+    #    account_type: user
+    #    force_update: true
+    #    static_list: GithubHosts
 
     # 传送hosts文件到私人服务器；解决gitee违规问题；
-    - name: put hosts to private
-      uses: wlixcc/SFTP-Deploy-Action@v1.0
-      with:
-        username: 'github'
-        server: 'suni.cf'
-        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
-        local_path: './*.txt'
-        remote_path: '/rw'
-        args: '-o ConnectTimeout=15'
+    #- name: put hosts to private
+    #  uses: wlixcc/SFTP-Deploy-Action@v1.0
+    #  with:
+    #    username: 'github'
+    #    server: 'suni.cf'
+    #    ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
+    #    local_path: './*.txt'
+    #    remote_path: '/rw'
+    #    args: '-o ConnectTimeout=15'
         
     # 删除无用 workflow runs;
     - name: Delete workflow runs
